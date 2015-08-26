@@ -1,0 +1,588 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quantum Computing</title>
+  <style>
+html { height: 100%; }
+body {
+  background-color: #ff4e50;
+  margin: 0;
+  padding: 0;
+  font-family: "Avenir Next",Helvetica,Arial,san-serif;
+  color: #fff;
+  overflow: hidden;
+  height: 100%;
+   -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+ }
+
+.slide {
+  position: absolute;
+  top: 0;
+  color: #eee;
+  overflow: hidden;
+ }
+
+ .slide.dark {
+  background: #000;
+ }
+
+ .slide.inverse {
+  background-color: #fff;
+ }
+
+.slide.transition, .sub-slide.transition {
+  -webkit-transition: left .15s ease;
+  -moz-transition: left .15s ease;
+  transition: left .15s ease;
+}
+
+.slide img, .slide video {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.offscreen img, .offscreen video {
+  display: none;
+}
+
+.slide .box {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  height: 50%;
+  width: 81%;
+  overflow: hidden;
+}
+
+.slide .box img {
+  -webkit-transform: translate(-60%, 0);
+  -moz-transform: translate(-80%, 0);
+  -webkit-filter: blur(5px) brightness(80%);
+  -moz-filter: blur(5px) brightness(80%);
+  width: 117%;
+  height: 200%;
+  top: -60%;
+  left: 61%;
+}
+
+.slide img.fit-horizontal {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transform: translate(0, -50%)
+}
+
+.slide h2.center, .slide h3.center{
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.slide h1 {
+  font-size: 14vw;
+  line-height: 1.5em;
+  position: absolute;
+  z-index: 1;
+}
+
+.slide .long-title {
+  font-size: 5vw;
+  margin-top: 20%;
+}
+
+.slide h1.bottom-right {
+  top: 50%;
+}
+
+.slide .center {
+  text-align: center;
+}
+
+.slide h2 {
+  font-size: 5vw;
+  line-height: 1.5em;
+  position: absolute;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.slide h3 {
+  font-size: 3.5vw;
+  line-height: 1.5em;
+  position: absolute;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.slide h3.above { bottom: 50%; }
+.slide h3.below { top: 50%; }
+.slide .divider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 4px dashed white;
+}
+
+.slide .vertical-divider {
+  position: absolute;
+  top: 5%;
+  height: 70%;
+  left: 50%;
+  border-left: 4px dashed white;
+}
+
+.slide .rotate.left {
+  transform: rotateZ(90deg);
+  position: absolute;
+  top: 17%;
+  left: 44%;
+}
+
+.slide .rotate.right {
+  transform: rotateZ(-90deg);
+  position: absolute;
+  top: 10%;
+  right: 47%;
+}
+
+.slide .bottom-right {
+  top: 64%;
+  right: 5%;
+}
+
+.slide .bottom-left {
+  top: 64%;
+  left: 5%;
+}
+
+.slide .top-right {
+  top: 20%;
+  right: 5%;
+}
+
+.slide .top-left {
+  top: 20%;
+  left: 5%;
+}
+
+.slide .high { top: 10%; }
+.slide .low { top: 74%; }
+.slide .top-right.inset { right: 20%; }
+.slide .bottom-right.inset { right: 20%; }
+.slide .top-left.inset { left: 20%; }
+.slide .bottom-left.inset { left: 20%; }
+.slide .inverse { color: black; }
+
+.big {
+  font-size: 10vw;
+  line-height: 1.5em;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  margin-top: -.75em;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.slide .bigger {
+  font-size: 8vw;
+}
+
+.slide .equation {
+  font-size: 4vw;
+}
+
+.slide .equation.high {
+  font-size: 4.5vw;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+}
+
+.slide .equation.low {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  font-size: 4.5vw;
+  bottom: 0%;
+}
+
+.slide .graph {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.slide .header {
+  font-size: 6vw;
+  left: 10%;
+  top: 8%;
+}
+
+.slide .quote {
+  font-size: 2.5vw;
+  margin: 10% 10%;
+}
+
+.slide ul {
+  position: absolute;
+  top: 30%;
+  width: 80%;
+  left: 10%;
+  font-size: 4vw;
+  margin: 0;
+  padding: 2% 0;
+  list-style: none;
+}
+
+.slide ul li {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.slide ul li:before {
+  content: "• ";
+}
+
+.slide.outline ul li:before {
+  text-shadow: 0px 0px 8px black;
+}
+
+
+.outline {
+  text-shadow: 0px 0px 8px black;
+}
+
+.left-table {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 25vw;
+  height: 25vw;
+  border-spacing: 3vw;
+  border-collapse: separate;
+}
+
+.right-table {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  width: 35vw;
+  height: 30vw;
+  border-spacing: 3vw;
+  border-collapse: separate;
+}
+
+.slide table th {
+  font-weight: 100;
+  font-size: 1.2em;
+}
+
+.slide table .on {
+  background-color: white;
+  border: 2px solid white;
+}
+
+.slide table .off {
+  border: 2px solid white;
+}
+
+
+  </style>
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+</head>
+<body>
+
+  <div class="slide">
+    <h2 class="long-title center">Why Philosophers Should Care About Computational Complexity</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Computability vs. Complexity</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Complexity 101</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">P vs. EXP</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Entscheidungsproblem </h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Gödel</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Turing Test</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Lookup Tables</h2>
+  </div>
+
+  <div class="slide">
+    <p class="quote">(*) Any computer program that passed the Turing Test would need to be exponentially
+       inefficient in the length of the test as measured in some resource such as time, memory usage,
+       or the number of bits needed to write the program down. In other words, the astronomical lookup
+       table is essentially the best one can do.
+    </p>
+  </div>
+
+  <div class="slide">
+    <p class="quote">However, complexity theory also makes it clear that, even if we supposed (*)
+      held, there would be little hope of proving it in our current state of mathematical knowledge.
+      After all, we can’t even prove plausible, well-defined conjectures such as P ≠ NP.
+    </p>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Computationalism</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Syntactic vs. Semantic</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Waterfalls</h2>
+  </div>
+
+  <div class="slide">
+    <p class="quote">If we are consistent in adopting the Turing test or some other
+      “objective” criterion for intelligent behavior, then the answer to such questions
+      as “Can unintelligent bits of matter produce intelligent behavior?” and even,
+      “How exactly do they do it” are ludicrously obvious. Any thermostat,
+      pocket calculator, or waterfall produces “intelligent behavior,” ... everything will
+      have some description under which it behaves as if it were intelligent. But this
+      sense of “intelligent behavior” is of no psychological relevance at all.
+    </p>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Reductions</h2>
+  </div>
+
+  <div class="slide">
+    <p class="quote">A bit more precisely, I conjecture that, given any chess-playing
+      algorithm A that accesses a “waterfall oracle” W, there is an equally good
+      chess-playing algorithm A′, with similar time and space requirements,
+      that does not access W.
+    </p>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Hume and Occam's Razor</h2>
+  </div>
+
+  <div class="slide">
+    <p class="quote">PAC (informally): Given a finite hypothesis class, H, an
+      unknown distribution, and a set of log |H| sample points from the distribution,
+      if you can find a hypothesis in H that is approximately correct for the sample set,
+      it will probably be approximately correct for the distribution.
+    </p>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Quantum Computing</h2>
+  </div>
+
+  <div class="slide">
+    <p class="quote">Most quantum computing researchers would be thrilled if
+      quantum computing turned out to be theoretically impossible. The revisions
+      to physics would be way more interesting than actually building a quantum
+      computer.
+    </p>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Copenhagen vs. Many Worlds</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Nature's Computational Effort</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">BQP ≠ Distributed Computing</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">0 Knowledge (M/A) Proofs</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Closed Timelike Curves</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Grandfather Paradox</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Fixed Points</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">Hamlet Paradox</h2>
+  </div>
+
+  <div class="slide">
+    <h2 class="bottom-right">CTC = PSPACE ⊆ NP</h2>
+  </div>
+
+    <div class="slide">
+      <h2 class="bottom-right">Economics</h2>
+    </div>
+</body>
+<foot>
+  <script>
+    var slideIndex = 0;
+    var subSlideIndex = 0;
+    var subslides;
+
+    function removeClass(el, clss) {
+      var re = new RegExp("^"+clss+"$|^"+clss+"\\s+|\\s+"+clss+"$|\\s+"+clss+"(\\s+)");
+      el.setAttribute( "class", (el.getAttribute('class')||'').replace(re,"$1") )
+    }
+    function addClass(el, clss) {
+      removeClass(el,clss)
+      el.setAttribute( 'class', (el.getAttribute('class') || '') + ' ' + clss )
+    }
+    function hasClass(el, clss) {
+      return !!(el.getAttribute('class')||'').match(new RegExp("(\\s+|^)"+clss+"(\\s+|$)"));
+    }
+
+    if ( location.hash && location.hash.match(/#\d+$/) )
+      slideIndex = +location.hash.match(/#(\d+)$/)[1]
+
+    var slides = document.getElementsByClassName('slide');
+    arrangeSlides( slides, slideIndex, true )
+
+    function arrangeSlides( slides, index, autoHeight ) {
+      for (var i=0, slide; slide = slides[i]; i++) {
+        slide.style.width = document.body.offsetWidth + 'px';
+        if ( autoHeight )
+          slide.style.height = document.body.offsetHeight + 'px';
+        if ( i > index ) {
+          slide.style.left = document.body.offsetWidth + 'px';
+          addClass( slide, 'offscreen' );
+        } else if ( i < index ) {
+          slide.style.left = -slide.offsetWidth + 'px';
+          addClass( slide, 'offscreen' );
+        } else
+          slide.style.left = '0px';
+      }
+    }
+
+    var offscreenTimeout;
+    function transition( oldSlide, newSlide, direction, adjustHeight ) {
+      clearTimeout(offscreenTimeout);
+      var windowWidth = document.body.offsetWidth;
+      removeClass( newSlide, 'transition' );
+      removeClass( newSlide, 'offscreen' );
+      newSlide.style.width = document.body.offsetWidth + 'px';
+      if (adjustHeight)
+        newSlide.style.height = document.body.offsetHeight + 'px';
+      newSlide.style.left = direction * windowWidth + 'px';
+      addClass( newSlide, 'transition' );
+      addClass( oldSlide, 'transition' );
+
+      setTimeout(function() {
+        newSlide.style.left = '0px';
+        oldSlide.style.left = -direction * oldSlide.offsetWidth + 'px'
+      }, 1);
+
+      offscreenTimeout = setTimeout(function() { addClass(oldSlide, 'offscreen'); }, 1000);
+      return newSlide;
+    }
+
+    function transitionSlide( oldSlide, newSlide, direction ) {
+      var interactive = oldSlide.getElementsByClassName('interactive');
+      for (var i=0, el; el = interactive[i]; i++)
+        window[el.getAttribute('data-runner')].hide();
+
+      interactive = newSlide.getElementsByClassName('interactive');
+      for (var i=0, el; el = interactive[i]; i++)
+        window[el.getAttribute('data-runner')].show(el);
+
+      return transition(oldSlide, newSlide, direction, true);
+    }
+
+    function next() {
+      if ( subslides && subSlideIndex < subslides.length - 1 )
+        return transition( subslides[subSlideIndex], subslides[++subSlideIndex], 1 );
+
+      if ( slideIndex >= slides.length - 1 )
+        return;
+
+      transitionSlide( slides[slideIndex], slides[++slideIndex], 1 );
+      location.hash = slideIndex;
+    }
+
+    function prev() {
+      if ( subslides && subSlideIndex > 0 )
+        return transition( subslides[subSlideIndex], subslides[--subSlideIndex], -1 );
+
+      if ( slideIndex < 1 )
+        return;
+      transitionSlide( slides[slideIndex], slides[--slideIndex], -1 );
+      location.hash = slideIndex;
+    }
+
+    document.body.onkeyup = function(e) {
+      if (e.keyCode == 39) {
+        next()
+        return false;
+      } else if (e.keyCode == 37) {
+        prev()
+        return false;
+      }
+    }
+
+    function graph() {
+      var canvases = document.querySelectorAll('canvas.graph');
+      for (var i=0, c; c=canvases[i]; i++) {
+        var w = c.width = c.offsetWidth * (window.devicePixelRatio || 1);
+        var h = c.height = c.offsetHeight * (window.devicePixelRatio || 1);
+        var ctx = c.getContext('2d');
+        ctx.translate(0,h);
+        ctx.scale(1,-1);
+        ctx.lineWidth = 3;
+        for (var j=0, line; line=c.getAttribute('data-line'+j); j++) {
+          ctx.beginPath();
+          ctx.strokeStyle = line.split('|')[0];
+          var f = new Function('x', 'return ' + line.split('|')[1]);
+          ctx.beginPath();
+          ctx.moveTo(1, h*f(1/w));
+          for (var x=2/w; x<=1; x += 1/w) ctx.lineTo(w*x,h*f(x));
+          ctx.stroke();
+        }
+      }
+    }
+    graph();
+
+  </script>
+</foot>
+</html>
